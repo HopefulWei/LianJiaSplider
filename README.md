@@ -1,7 +1,10 @@
-##链家爬虫
+# LianJiaSplider
+Statistics of urban house price information on LianJia。
 
-爬取北京地区链家历年二手房成交记录。[链家爬虫](http://lanbing510.info/2016/03/15/Lianjia-Spider.html)一文的全部代码，包括链家模拟登录代码。
+该代码主要用于爬取链家网的城市所有区县的房价数据，并保存在csv文件中，数据的维度如下图，同时可以统计二手房均价。
 
-###爬取数据的部分截图
-
-![Aaron Swartz](https://github.com/lanbing510/LianJiaSpider/raw/master/screenshots/lianjia.jpg)
+通过输入想要查询的城市，获取所在城市的信息。
+#### 使用方法如图：
+![Aaron Swartz](https://github.com/HopefulWei/LianJiaSplider/blob/master/images/屏幕快照%202020-02-02%20下午9.29.32.png)
+#### 运行的结果如图：
+![Aaron Swartz](https://github.com/HopefulWei/LianJiaSplider/blob/master/images/屏幕快照%202020-02-02%20下午9.30.14.png)
