@@ -15,6 +15,7 @@ import requests
 import lxml
 import pandas as pd
 import sys
+import csv
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
@@ -146,9 +147,11 @@ def xiaoqu_spider(region, A, city_String):
     print(region+"区县信息搜集完成")
     if(i>0):
         print(region + "区县的平均二手房价为："+str(sum/i))
+        B = sum/i
     else:
         print(region + "暂无二手房价信息")
-    return A
+        B = "None"
+    return A, B
 
 def City(city):
     if(city == "北京"):
@@ -184,8 +187,18 @@ if __name__ == "__main__":
     if(city_string != "error"):
         list=region_spider(city_string)
         A=[[],[],[],[],[],[],[]]
+        record=[]
         for region in list:
-            A=xiaoqu_spider(region, A, city_string)
+            A, B = xiaoqu_spider(region, A, city_string)
+            record.append(B)
+
+        out = open("record/"+city_string+'Record.csv', 'a')
+        csv_write = csv.writer(out, dialect='excel')
+        listForRecord=[]
+        for qu in list:
+            listForRecord.append(qu.decode("utf-8").encode("gbk"))
+        csv_write.writerow(listForRecord)
+        csv_write.writerow(record)
         xinXi = ["所属区县", "所在小区", "交通位置", "建筑风格", "建成时间", "参考价格", "网址"]
         dataframe = pd.DataFrame({xinXi[0]: A[0], xinXi[1]: A[1], xinXi[2]: A[2], xinXi[3]: A[3], xinXi[4]: A[4], xinXi[5]: A[5], xinXi[6]: A[6]})
         dataframe.to_csv("result/"+city_string+"LianJia.csv", index=False, sep=',', encoding="gbk")
